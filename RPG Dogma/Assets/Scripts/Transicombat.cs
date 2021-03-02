@@ -26,7 +26,7 @@ public class Transicombat : MonoBehaviour
 		{
 			count += Time.deltaTime;
 		if ( count < 5.0f){
-				valor = Random.Range(0,10);
+				valor = Random.Range(0,6);
 		}else if (count > 7.0f)
 			{
 					Debug.Log (valor);
@@ -40,7 +40,7 @@ public class Transicombat : MonoBehaviour
 						enemy = "Amazona1";
 						Debug.Log (enemy);
 					}else {
-						count = 5.0f;
+						count = 4.9f;
 					}
 				
 			}
