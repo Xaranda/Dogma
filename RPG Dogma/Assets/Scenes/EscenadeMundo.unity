@@ -17508,5 +17508,10 @@ PrefabInstance:
       propertyPath: speed
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 8228680550099673467, guid: c712b6fbbbe80e746b17b21328387b89,
+        type: 3}
+      propertyPath: SaeraHealth
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c712b6fbbbe80e746b17b21328387b89, type: 3}

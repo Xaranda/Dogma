@@ -5,10 +5,24 @@ using UnityEngine;
 public class SaeraController : MonoBehaviour
 {
 	public float speed = 3.0f;
+
+	
+
+	public static int SaeraMaxHealth = 10;
+	public static int SaeraHealth=10;
+
+
 	Animator animator;
 	Vector2 lookDirection = new Vector2(1,0);
 	Rigidbody2D rigidbody2d;
     // Start is called before the first frame update
+
+	void Awake()
+    {
+		DontDestroyOnLoad(this.gameObject);
+		SaeraHealth = SaeraMaxHealth;
+		Debug.Log(SaeraHealth);
+    }
     void Start()
     {
 		animator = GetComponent<Animator>();
