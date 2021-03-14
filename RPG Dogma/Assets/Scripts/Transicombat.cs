@@ -10,10 +10,8 @@ public class Transicombat : MonoBehaviour
 	string enemy;
 	int valor =11;
 
-	
-	
-    // Start is called before the first frame update
-    void Start()
+	// Start is called before the first frame update
+	void Start()
     {
         count=0.0f;
 		restart=false;
@@ -34,7 +32,7 @@ public class Transicombat : MonoBehaviour
 					{
 						SceneManager.LoadScene (2);
 						enemy = "Perro1";
-						Debug.Log (enemy);
+						//OnEncountered();
 					}else if (valor == 5){
 						SceneManager.LoadScene (2);
 						enemy = "Amazona1";
