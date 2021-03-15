@@ -52,7 +52,7 @@ public class Enemigos
         }
         float modifiers = Random.Range(0.9f, 1.05f) * critical;
         float a = (2 * attacker.Level + 10) / 250f;
-        float b = a * ((float)attacker.Attack / Defense) + 2;
+        float b = a * ((float)attacker.Attack / Defense) + 1;
         int damage = Mathf.FloorToInt(b * modifiers);
 
         HP -= damage;

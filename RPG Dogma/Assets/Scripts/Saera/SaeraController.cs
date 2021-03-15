@@ -23,7 +23,6 @@ public class SaeraController : MonoBehaviour
     {
 		DontDestroyOnLoad(this.gameObject);
 		SaeraHealth = SaeraMaxHealth;
-		Debug.Log(SaeraHealth);
 
 		animator = GetComponent<Animator>();
 	}

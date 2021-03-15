@@ -17,8 +17,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   type1: 5
   type2: 7
-  maxHp: 12
-  attack: 2
+  maxHp: 21
+  attack: 10
   defense: 2
   spAttack: 0
   spDefense: 0

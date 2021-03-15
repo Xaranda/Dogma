@@ -15,10 +15,6 @@ public class BattleSystem : MonoBehaviour
 	public static BattleState state;
 
 
-
-	public int currentHealth;
-	public int enemigoHealth = 10;
-
 	public bool playerDodgeDer;
 	public bool playerDodgeIzq;
 	public bool playerDodgeDown;
@@ -44,7 +40,7 @@ public class BattleSystem : MonoBehaviour
 
 
 		//CurrentHealthSlider.maxValue = SaeraController.SaeraMaxHealth;
-		currentHealth = SaeraController.SaeraHealth;
+		//currentHealth = SaeraController.SaeraHealth;
 		//UpdateSliders();
 
 	}
@@ -73,9 +69,6 @@ public class BattleSystem : MonoBehaviour
 
 		Action();
 
-		yield return EnemyHud.UpdateHP();
-		yield return SaeraHud.UpdateHP();
-
 	}
 
 	void Action()
@@ -84,13 +77,10 @@ public class BattleSystem : MonoBehaviour
 		dialogBox.EnableDialogBox(false);
 
 		StartCoroutine(EnemyUnit.GetComponent<Enemy>().Start());
-		
-
 
 	}
 	public void StartEnemyAnimation(string anim)
 	{
-		Debug.Log(anim);
 		StartCoroutine(Delay(() =>
 		{
 			if (!playerDodgeDown && !playerDodgeIzq && anim == "AtackDerPerro") //si no esquivo abajo
@@ -98,8 +88,8 @@ public class BattleSystem : MonoBehaviour
 			{
 				//StartPlayerAnimation("Golpeado");
 				bool isFainted = PlayerUnit.saera.Damage(EnemyUnit.enemy);
-				
-
+				SaeraHud.UpdateHP();
+				Debug.Log(PlayerUnit.saera.HP);
 			}
 
 			if (!playerDodgeDown && !playerDodgeDer && anim == "AtackIzqPerro") //si no esquivo abajo
@@ -108,8 +98,8 @@ public class BattleSystem : MonoBehaviour
 
 				//StartPlayerAnimation("Golpeado");
 				bool isFainted = PlayerUnit.saera.Damage(EnemyUnit.enemy);
-				
-
+				Debug.Log(PlayerUnit.saera.HP);
+				SaeraHud.UpdateHP();
 			}
 		}, 1f));
 		EnemyUnit.animator.Play(anim, 0);
@@ -117,6 +107,7 @@ public class BattleSystem : MonoBehaviour
 
 	public void StartPlayerAnimation(string anim)
 	{
+
 		if (anim == "SaeraCombateAtackIzq")
 		{
 			if (!enemyDodge)
@@ -127,7 +118,7 @@ public class BattleSystem : MonoBehaviour
 					// aqui va algun aviso de UI de golpeo
 					// aqui va algun sonido de golpeo
 					bool isFainted = EnemyUnit.enemy.Damage(PlayerUnit.saera);
-					
+					EnemyHud.UpdateHP();
 				}, 0.2f));
 			}
 			else
@@ -157,7 +148,7 @@ public class BattleSystem : MonoBehaviour
 				StartCoroutine(Delay(() => {
 					//StartEnemyAnimation("FrontalAttackRecived");
 					bool isFainted = EnemyUnit.enemy.Damage(PlayerUnit.saera);
-					
+					EnemyHud.UpdateHP();
 				}, 0.2f));
 			}
 			else
@@ -175,7 +166,7 @@ public class BattleSystem : MonoBehaviour
 				StartCoroutine(Delay(() => {
 					//StartEnemyAnimation("DerechaAttackRecived");
 					bool isFainted = EnemyUnit.enemy.Damage(PlayerUnit.saera);
-
+					EnemyHud.UpdateHP();
 				}, 0.2f));
 			}
 			else
@@ -198,14 +189,13 @@ public class BattleSystem : MonoBehaviour
 			//has ganado
 			Debug.Log("Has ganado");
 		}
+
 	}
 
 
 	IEnumerator Delay(System.Action action, float delay)
 	{
 		yield return new WaitForSeconds(delay);
-		yield return EnemyHud.UpdateHP();
-		yield return SaeraHud.UpdateHP();
 		action.Invoke();
 	}
 
