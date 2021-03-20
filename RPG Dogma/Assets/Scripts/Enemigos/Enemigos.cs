@@ -19,28 +19,28 @@ public class Enemigos
 
     public int Attack
     {
-        get { return Mathf.FloorToInt((Base.Attack * Level) / 100f) + 5; }
+        get { return Mathf.FloorToInt((Base.Attack * Level) / 8f) + 5; }
     }
     public int Defense
     {
-        get { return Mathf.FloorToInt((Base.Defense * Level) / 100f) + 5; }
+        get { return Mathf.FloorToInt((Base.Defense * Level) / 8f) + 5; }
     }
     public int SpAttack
     {
-        get { return Mathf.FloorToInt((Base.SpAttack * Level) / 100f) + 5; }
+        get { return Mathf.FloorToInt((Base.SpAttack * Level) / 7f) + 5; }
 
     }
     public int SpDefense
     {
-        get { return Mathf.FloorToInt((Base.SpDefense * Level) / 100f) + 5; }
+        get { return Mathf.FloorToInt((Base.SpDefense * Level) / 7f) + 5; }
     }
     public int Speed
     {
-        get { return Mathf.FloorToInt((Base.Speed * Level) / 100f) + 5; }
+        get { return Mathf.FloorToInt((Base.Speed * Level) / 25f) + 5; }
     }
     public int MaxHp
     {
-        get { return Mathf.FloorToInt((Base.MaxHp * Level) / 100f) + 10; }
+        get { return Mathf.FloorToInt((Base.MaxHp * Level)/10f) + 10; }
     }
 
     public bool Damage (Enemigos attacker)

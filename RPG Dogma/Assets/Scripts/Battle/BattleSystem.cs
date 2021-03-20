@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,10 @@ public class BattleSystem : MonoBehaviour
 
 	public static BattleState state;
 
+	public event Action<bool> OnBattleOver;
+
+	private bool enemyFainted = false;
+	private bool playerFainted = false;
 
 	public bool playerDodgeDer;
 	public bool playerDodgeIzq;
@@ -50,24 +55,31 @@ public class BattleSystem : MonoBehaviour
 		//CurrentHealthSlider.value = currentHealth;
 	}
 
-	private void Start()
+	public void StartBattle()
 	{
+	
 		StartCoroutine(SetupBattle());
 	}
+	public void HandleUpdate ()
+    {
+		Action();
+    }
 
 
 	public IEnumerator SetupBattle()
 	{
-		PlayerUnit.Setup();
-		SaeraHud.SetData(PlayerUnit.saera);
-		EnemyUnit.Setup();
-		EnemyHud.SetData(EnemyUnit.enemy);
+		Debug.Log(state);
 
-		yield return dialogBox.TypeDialog($"¡Cuidado! {PlayerUnit.saera.Base.Name} te corta el paso");
+			PlayerUnit.Setup();
+			SaeraHud.SetData(PlayerUnit.saera);
+			EnemyUnit.Setup();
+			EnemyHud.SetData(EnemyUnit.enemy);
 
-		yield return new WaitForSeconds(1.5f);
+			yield return dialogBox.TypeDialog($"¡Cuidado! {EnemyUnit.enemy.Base.Name} te corta el paso");
 
-		Action();
+			yield return new WaitForSeconds(1.5f);
+
+			Action();
 
 	}
 
@@ -79,6 +91,8 @@ public class BattleSystem : MonoBehaviour
 		StartCoroutine(EnemyUnit.GetComponent<Enemy>().Start());
 
 	}
+
+
 	public void StartEnemyAnimation(string anim)
 	{
 		StartCoroutine(Delay(() =>
@@ -87,9 +101,20 @@ public class BattleSystem : MonoBehaviour
 																				// ni a la derecha (es decir me muevo a la izquierda) y me ataca por la derecha entonces:
 			{
 				//StartPlayerAnimation("Golpeado");
-				bool isFainted = PlayerUnit.saera.Damage(EnemyUnit.enemy);
+				playerFainted = PlayerUnit.saera.Damage(EnemyUnit.enemy);
 				SaeraHud.UpdateHP();
-				Debug.Log(PlayerUnit.saera.HP);
+				if (playerFainted)
+				{
+					//gameover
+					Debug.Log("has perdido");
+					SaeraHud.UpdateHP();
+					dialogBox.EnableDialogBox(true);
+					StartCoroutine(dialogBox.TypeDialog("Has perdido"));
+					state = BattleState.End;
+					StartCoroutine(Delay(() => {
+						OnBattleOver(false);
+					}, 2f));
+				}
 			}
 
 			if (!playerDodgeDown && !playerDodgeDer && anim == "AtackIzqPerro") //si no esquivo abajo
@@ -97,9 +122,20 @@ public class BattleSystem : MonoBehaviour
 			{
 
 				//StartPlayerAnimation("Golpeado");
-				bool isFainted = PlayerUnit.saera.Damage(EnemyUnit.enemy);
-				Debug.Log(PlayerUnit.saera.HP);
+				playerFainted = PlayerUnit.saera.Damage(EnemyUnit.enemy);
 				SaeraHud.UpdateHP();
+				if (playerFainted)
+				{
+					//gameover
+					Debug.Log("has perdido");
+					SaeraHud.UpdateHP();
+					dialogBox.EnableDialogBox(true);
+					StartCoroutine(dialogBox.TypeDialog("Has perdido"));
+					state = BattleState.End;
+					StartCoroutine(Delay(() => {
+						OnBattleOver(false);
+					}, 2f));
+				}
 			}
 		}, 1f));
 		EnemyUnit.animator.Play(anim, 0);
@@ -117,8 +153,21 @@ public class BattleSystem : MonoBehaviour
 					//StartEnemyAnimation("IzquierdaAttackRecived");
 					// aqui va algun aviso de UI de golpeo
 					// aqui va algun sonido de golpeo
-					bool isFainted = EnemyUnit.enemy.Damage(PlayerUnit.saera);
+					enemyFainted = EnemyUnit.enemy.Damage(PlayerUnit.saera);
 					EnemyHud.UpdateHP();
+					if (enemyFainted)
+					{
+						//has ganado
+						Debug.Log("Has ganado");
+						EnemyHud.UpdateHP();
+						dialogBox.EnableDialogBox(true);
+						StartCoroutine(dialogBox.TypeDialog("Has ganado"));
+						state = BattleState.End;
+						StartCoroutine(Delay(() => {
+							OnBattleOver(true);
+						}, 2f));
+
+					}
 				}, 0.2f));
 			}
 			else
@@ -147,8 +196,21 @@ public class BattleSystem : MonoBehaviour
 			{
 				StartCoroutine(Delay(() => {
 					//StartEnemyAnimation("FrontalAttackRecived");
-					bool isFainted = EnemyUnit.enemy.Damage(PlayerUnit.saera);
+					enemyFainted = EnemyUnit.enemy.Damage(PlayerUnit.saera);
 					EnemyHud.UpdateHP();
+					if (enemyFainted)
+					{
+						//has ganado
+						Debug.Log("Has ganado");
+						EnemyHud.UpdateHP();
+						dialogBox.EnableDialogBox(true);
+						StartCoroutine(dialogBox.TypeDialog("Has ganado"));
+						state = BattleState.End;
+						StartCoroutine(Delay(() => {
+							OnBattleOver(true);
+						}, 2f));
+
+					}
 				}, 0.2f));
 			}
 			else
@@ -165,8 +227,21 @@ public class BattleSystem : MonoBehaviour
 			{
 				StartCoroutine(Delay(() => {
 					//StartEnemyAnimation("DerechaAttackRecived");
-					bool isFainted = EnemyUnit.enemy.Damage(PlayerUnit.saera);
+					enemyFainted = EnemyUnit.enemy.Damage(PlayerUnit.saera);
 					EnemyHud.UpdateHP();
+					if (enemyFainted)
+					{
+						//has ganado
+						Debug.Log("Has ganado");
+						EnemyHud.UpdateHP();
+						dialogBox.EnableDialogBox(true);
+						StartCoroutine(dialogBox.TypeDialog("Has ganado"));
+						state = BattleState.End;
+						StartCoroutine(Delay(() => {
+							OnBattleOver(true);
+						}, 2f));
+
+					}
 				}, 0.2f));
 			}
 			else
@@ -179,16 +254,8 @@ public class BattleSystem : MonoBehaviour
 		}
 		PlayerUnit.animator.Play(anim, 0);
 
-		if (PlayerUnit.saera.Damage(EnemyUnit.enemy) == true)
-		{
-			//gameover
-			Debug.Log("has perdido");
-		}
-		else if (EnemyUnit.enemy.Damage(PlayerUnit.saera) == true)
-		{
-			//has ganado
-			Debug.Log("Has ganado");
-		}
+		
+		
 
 	}
 
@@ -198,6 +265,9 @@ public class BattleSystem : MonoBehaviour
 		yield return new WaitForSeconds(delay);
 		action.Invoke();
 	}
-
+	IEnumerator Wait()
+	{
+		yield return new WaitForSeconds(2f);
+	}
 
 }
