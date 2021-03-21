@@ -15,6 +15,9 @@ public class BattleSystem : MonoBehaviour
 
 	public static BattleState state;
 
+	Grupo grupo;
+	Enemigos worldEnemy;
+
 	public event Action<bool> OnBattleOver;
 
 	private bool enemyFainted = false;
@@ -55,9 +58,10 @@ public class BattleSystem : MonoBehaviour
 		//CurrentHealthSlider.value = currentHealth;
 	}
 
-	public void StartBattle()
+	public void StartBattle(Grupo grupo, Enemigos worldEnemy)
 	{
-	
+		this.grupo = grupo;
+		this.worldEnemy = worldEnemy;
 		StartCoroutine(SetupBattle());
 	}
 	public void HandleUpdate ()
@@ -70,9 +74,9 @@ public class BattleSystem : MonoBehaviour
 	{
 		Debug.Log(state);
 
-			PlayerUnit.Setup();
+			PlayerUnit.Setup(grupo.GetSaeraHealth());
 			SaeraHud.SetData(PlayerUnit.saera);
-			EnemyUnit.Setup();
+			EnemyUnit.Setup(worldEnemy);
 			EnemyHud.SetData(EnemyUnit.enemy);
 
 			yield return dialogBox.TypeDialog($"¡Cuidado! {EnemyUnit.enemy.Base.Name} te corta el paso");

@@ -24,7 +24,10 @@ public class GameController : MonoBehaviour
         battleSystem.gameObject.SetActive(true);
         worldCamera.gameObject.SetActive(false);
 
-        battleSystem.StartBattle();
+        var grupo = saeraController.GetComponent<Grupo>();
+        var worldEnemy = FindObjectOfType<MapArea>().GetComponent<MapArea>().GetRandomEnemy();
+
+        battleSystem.StartBattle(grupo, worldEnemy);
     }
 
 

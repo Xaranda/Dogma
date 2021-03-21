@@ -5,15 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    [SerializeField] EnemigoBase _base;
-    [SerializeField] int level;
 
     public Animator animator;
     public Enemigos enemy { get; set; }
 
-    public void Setup()
+    public void Setup(Enemigos enemigo)
     {
-        enemy = new Enemigos(_base, level);
+        enemy = enemigo;
         enemy.Base.anim = GetComponent<Animator>();
     }
     public float attackFreq; // creo variable para frecuencia de ataque

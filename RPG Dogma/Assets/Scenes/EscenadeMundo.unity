@@ -205,8 +205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf996ae0f019bc14b8e89b09f81ca031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _base: {fileID: 11400000, guid: 8e0ab2208a6b92a43b50457bd93f3737, type: 2}
-  level: 5
   animator: {fileID: 278790998}
 --- !u!1001 &332677802
 PrefabInstance:
@@ -626,6 +624,7 @@ GameObject:
   m_Component:
   - component: {fileID: 524126766}
   - component: {fileID: 524126765}
+  - component: {fileID: 524126767}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -662,6 +661,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &524126767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524126764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab395e6c757ab34f802ce563fec77c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldEnemies:
+  - _base: {fileID: 11400000, guid: c77275df26a227a4d855a024d954cc5a, type: 2}
+    level: 1
+  - _base: {fileID: 11400000, guid: c77275df26a227a4d855a024d954cc5a, type: 2}
+    level: 2
+  - _base: {fileID: 11400000, guid: c77275df26a227a4d855a024d954cc5a, type: 2}
+    level: 3
 --- !u!1 &547923669
 GameObject:
   m_ObjectHideFlags: 0
@@ -21433,8 +21451,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba645c89268d284fbb6219545d6ae38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _base: {fileID: 11400000, guid: c77275df26a227a4d855a024d954cc5a, type: 2}
-  level: 1
   animator: {fileID: 1245713950}
   attackFreq: 2
   attackProb: 45
@@ -21453,6 +21469,21 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8228680549537817102}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1267197474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267197473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e13fcd12f08c7043b446fef97116b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grupo:
+  - _base: {fileID: 11400000, guid: 8e0ab2208a6b92a43b50457bd93f3737, type: 2}
+    level: 1
 --- !u!114 &1267197476 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8228680550099673467, guid: c712b6fbbbe80e746b17b21328387b89,

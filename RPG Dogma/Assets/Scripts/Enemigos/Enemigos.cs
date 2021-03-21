@@ -2,17 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Enemigos
 {
-    public EnemigoBase Base { get; set; }
-    public int Level { get; set; }
+    [SerializeField] EnemigoBase _base;
+    [SerializeField] int level;
+
+    public EnemigoBase Base 
+    { 
+        get
+        {
+            return _base;
+        }
+    }
+    public int Level 
+    { 
+        get
+        {
+            return level;
+        }
+    }
 
     public int HP { get; set; }
 
-    public Enemigos(EnemigoBase pBase, int pLevel)
+    public void Init()
     {
-        Base = pBase;
-        Level = pLevel;
+
         HP = MaxHp;
 
     }

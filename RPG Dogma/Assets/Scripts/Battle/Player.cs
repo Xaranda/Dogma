@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-	[SerializeField] EnemigoBase _base;
-	[SerializeField] int level;
 
 	public Animator animator;
 	public Enemigos saera { get; set; }
@@ -14,9 +12,9 @@ public class Player : MonoBehaviour
 	private float wait;
 
 
-	public void Setup ()
+	public void Setup (Enemigos grupo)
     {
-		saera = new Enemigos(_base, level);
+		saera = grupo;
 		saera.Base.anim = GetComponent<Animator>();
 		cooldown = 0.0f;
     }
