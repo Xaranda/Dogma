@@ -13,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - SolidObjects
+  - EnemySpawner
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 448105707
+    locked: 0
+  - name: Foreground
+    uniqueID: 391602757
+    locked: 0
+  - name: Player
+    uniqueID: 2558559553
     locked: 0
