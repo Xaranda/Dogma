@@ -20,7 +20,15 @@ public class EnemigoBase : ScriptableObject
     [SerializeField] int spAttack;
     [SerializeField] int spDefense;
     [SerializeField] int speed;
-    
+
+    [SerializeField] int exp;
+
+
+    public int GetExpForLevel(int level)
+    {
+      return level * level * level;
+    }
+
     public string Name
     {
         get { return name; }
@@ -66,6 +74,7 @@ public class EnemigoBase : ScriptableObject
     {
         get { return speed; }
     }
+    public int Exp => exp;
 
 
 }

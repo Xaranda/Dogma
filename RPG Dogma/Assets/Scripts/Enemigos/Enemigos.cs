@@ -6,22 +6,23 @@ using UnityEngine;
 public class Enemigos
 {
     [SerializeField] EnemigoBase _base;
-    [SerializeField] int level;
+    [SerializeField] public int level;
 
-    public EnemigoBase Base 
-    { 
+    public EnemigoBase Base
+    {
         get
         {
             return _base;
         }
     }
-    public int Level 
-    { 
+    public int Level
+    {
         get
         {
             return level;
         }
     }
+    public int Exp {get;set;}
 
     public int HP { get; set; }
 
@@ -30,6 +31,16 @@ public class Enemigos
 
         HP = MaxHp;
 
+        Exp = Base.GetExpForLevel(Level);
+    }
+    public bool CheckForLevelUp ()
+    {
+      if (Exp > Base.GetExpForLevel(level + 1))
+      {
+        ++level;
+        return true;
+      }
+      return false;
     }
 
     public int Attack

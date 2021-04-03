@@ -24,7 +24,6 @@ public class Player : MonoBehaviour
     {
 		if (BattleSystem.state.ToString() == "Action")
 		{
-			Debug.Log(BattleSystem.state);
 			cooldown += Time.deltaTime;
 			if (1.0f < cooldown) {
 				if (Input.GetKeyDown(KeyCode.D))
@@ -34,7 +33,7 @@ public class Player : MonoBehaviour
 					{
 						BattleSystem.singleton.playerDodgeDer = false;
 					}, 2f));
-					
+
 					BattleSystem.singleton.StartPlayerAnimation("SaeraCombateDodgeDerecha");
 					cooldown = 0.0f;
 				}
@@ -46,7 +45,7 @@ public class Player : MonoBehaviour
 					{
 						BattleSystem.singleton.playerDodgeIzq = false;
 					}, 2f));
-					
+
 					BattleSystem.singleton.StartPlayerAnimation("SaeraCombateDodgeIzquierda");
 					cooldown = 0.0f;
 				}
@@ -83,10 +82,10 @@ public class Player : MonoBehaviour
 					BattleSystem.singleton.StartPlayerAnimation("SaeraCombateAtackDer");
 					cooldown = 0.0f;
 				}
-				
+
 			}
 		}
-		
+
 	}
 
 	IEnumerator Delay(System.Action action, float delay)

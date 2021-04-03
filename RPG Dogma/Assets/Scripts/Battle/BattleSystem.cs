@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum BattleState { Start, Action, End }
 
@@ -43,20 +44,8 @@ public class BattleSystem : MonoBehaviour
 			return;
 		}
 		singleton = this;
-
-		//enemigoHealthSlider.maxValue = enemigoHealth;
-
-
-		//CurrentHealthSlider.maxValue = SaeraController.SaeraMaxHealth;
-		//currentHealth = SaeraController.SaeraHealth;
-		//UpdateSliders();
-
 	}
-	void UpdateSliders()
-	{
-		//enemigoHealthSlider.value = enemigoHealth;
-		//CurrentHealthSlider.value = currentHealth;
-	}
+
 
 	public void StartBattle(Grupo grupo, Enemigos worldEnemy)
 	{
@@ -72,8 +61,6 @@ public class BattleSystem : MonoBehaviour
 
 	public IEnumerator SetupBattle()
 	{
-		Debug.Log(state);
-
 			PlayerUnit.Setup(grupo.GetSaeraHealth());
 			SaeraHud.SetData(PlayerUnit.saera);
 			EnemyUnit.Setup(worldEnemy);
@@ -94,6 +81,21 @@ public class BattleSystem : MonoBehaviour
 
 		StartCoroutine(EnemyUnit.GetComponent<Enemy>().Start());
 
+	}
+	void PjDevelopment ()
+	{
+		int exp = worldEnemy.Base.Exp;
+		int enemyLevel = worldEnemy.Level;
+
+		int expGain = Mathf.FloorToInt ((exp * enemyLevel)/7);
+		PlayerUnit.saera.Exp += expGain;
+		SaeraHud.SetExp();
+		while (PlayerUnit.saera.CheckForLevelUp())
+		{
+			SaeraHud.SetLevel();
+			Debug.Log ("Has subido de nivel");
+			SaeraHud.SetExp();
+		}
 	}
 
 
@@ -116,7 +118,7 @@ public class BattleSystem : MonoBehaviour
 					StartCoroutine(dialogBox.TypeDialog("Has perdido"));
 					state = BattleState.End;
 					StartCoroutine(Delay(() => {
-						OnBattleOver(false);
+						SceneManager.LoadScene (0);
 					}, 2f));
 				}
 			}
@@ -137,7 +139,7 @@ public class BattleSystem : MonoBehaviour
 					StartCoroutine(dialogBox.TypeDialog("Has perdido"));
 					state = BattleState.End;
 					StartCoroutine(Delay(() => {
-						OnBattleOver(false);
+						SceneManager.LoadScene (0);
 					}, 2f));
 				}
 			}
@@ -162,6 +164,7 @@ public class BattleSystem : MonoBehaviour
 					if (enemyFainted)
 					{
 						//has ganado
+						PjDevelopment();
 						Debug.Log("Has ganado");
 						EnemyHud.UpdateHP();
 						dialogBox.EnableDialogBox(true);
@@ -205,6 +208,7 @@ public class BattleSystem : MonoBehaviour
 					if (enemyFainted)
 					{
 						//has ganado
+						PjDevelopment();
 						Debug.Log("Has ganado");
 						EnemyHud.UpdateHP();
 						dialogBox.EnableDialogBox(true);
@@ -236,6 +240,7 @@ public class BattleSystem : MonoBehaviour
 					if (enemyFainted)
 					{
 						//has ganado
+						PjDevelopment();
 						Debug.Log("Has ganado");
 						EnemyHud.UpdateHP();
 						dialogBox.EnableDialogBox(true);
@@ -258,10 +263,12 @@ public class BattleSystem : MonoBehaviour
 		}
 		PlayerUnit.animator.Play(anim, 0);
 
-		
-		
+
+
 
 	}
+
+
 
 
 	IEnumerator Delay(System.Action action, float delay)

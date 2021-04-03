@@ -23,14 +23,11 @@ public class SaeraController : MonoBehaviour
 
 	private void Awake()
     {
-		DontDestroyOnLoad(this.gameObject);
-		SaeraHealth = SaeraMaxHealth;
-
 		animator = GetComponent<Animator>();
 	}
     void Start()
     {
-		
+
     }
 
     // Update is called once per frame
@@ -76,7 +73,7 @@ public class SaeraController : MonoBehaviour
 
 	private bool IsWalkable(Vector3 targetPos)
     {
-		if (Physics2D.OverlapCircle(targetPos , 0.2f , solidObjectsLayer) != null)
+		if (Physics2D.OverlapCircle(targetPos , 0.3f , solidObjectsLayer) != null)
         {
 			return false;
         }
@@ -85,7 +82,7 @@ public class SaeraController : MonoBehaviour
 
 	private void CheckForEncounters()
     {
-		if (Physics2D.OverlapCircle(transform.position,0.3f, EnemySpawner) != null)
+		if (Physics2D.OverlapCircle(transform.position,0.5f, EnemySpawner) != null)
 		{
 			if (UnityEngine.Random.Range (1,100)<=10)
             {
