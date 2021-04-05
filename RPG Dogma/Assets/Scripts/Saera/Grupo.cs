@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Grupo : MonoBehaviour
 {
-    [SerializeField] List<Enemigos> grupo;
+    [SerializeField] public List<Enemigos> grupo;
 
     private void Start ()
     {

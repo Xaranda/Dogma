@@ -13,6 +13,8 @@ public class BattleSystem : MonoBehaviour
 	[SerializeField] BattleHud SaeraHud;
 	[SerializeField] BattleHud EnemyHud;
 	[SerializeField] BattleDialogBox dialogBox;
+	public int lvl;
+	public int lvlcargado;
 
 	public static BattleState state;
 
@@ -28,9 +30,6 @@ public class BattleSystem : MonoBehaviour
 	public bool playerDodgeIzq;
 	public bool playerDodgeDown;
 
-	//public Slider enemigoHealthSlider;
-	//public Slider CurrentHealthSlider;
-
 	public bool enemyDodge;
 
 	public static BattleSystem singleton;
@@ -44,6 +43,17 @@ public class BattleSystem : MonoBehaviour
 			return;
 		}
 		singleton = this;
+	}
+
+	public void Update (){
+		lvl = PlayerUnit.saera.level;
+
+
+		if (Input.GetKeyDown(KeyCode.H))
+		{
+			PlayerUnit.saera.Healing(PlayerUnit.saera);
+			SaeraHud.UpdateHP();
+		}
 	}
 
 
@@ -262,10 +272,6 @@ public class BattleSystem : MonoBehaviour
 			}
 		}
 		PlayerUnit.animator.Play(anim, 0);
-
-
-
-
 	}
 
 

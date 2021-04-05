@@ -89,4 +89,8 @@ public class Enemigos
         }
         return false;
     }
+    public void Healing (Enemigos personaje)
+    {
+      HP = MaxHp;
+    }
 }

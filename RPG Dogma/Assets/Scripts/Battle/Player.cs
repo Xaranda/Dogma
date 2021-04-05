@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
 		cooldown = 0.0f;
     }
 
-    // Update is called once per frame
     public void Update()
     {
 		if (BattleSystem.state.ToString() == "Action")

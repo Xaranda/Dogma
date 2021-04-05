@@ -11,10 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EscenadeMundo.unity
     guid: beb960c8189cba64687a2f5028714164
-  - enabled: 1
-    path: Assets/Scenes/EscenadeBatalla.unity
-    guid: 01e0836e5dd34404fb5b1dbdb9f00022
-  - enabled: 1
-    path: Assets/Scenes/MainScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

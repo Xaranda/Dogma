@@ -14,23 +14,16 @@ public class SaeraController : MonoBehaviour
 
 	private bool isMoving;
 	private Vector2 input;
-	public static int SaeraMaxHealth = 10;
-	public static int SaeraHealth=10;
-
 
 	private Animator animator;
-    // Start is called before the first frame update
+	public float [] position;
+
 
 	private void Awake()
     {
 		animator = GetComponent<Animator>();
 	}
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     public void HandleUpdate()
     {
 		if (!isMoving)

@@ -7,6 +7,7 @@ public enum GameState { World, Battle}
 public class GameController : MonoBehaviour
 {
     [SerializeField] SaeraController saeraController;
+    [SerializeField] Player PlayerUnit;
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera worldCamera;
 
@@ -48,6 +49,11 @@ public class GameController : MonoBehaviour
             battleSystem.SetupBattle();
             StartCoroutine(Wait());
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+          Application.Quit();
+        }
+
     }
 
     IEnumerator Wait ()
