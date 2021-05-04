@@ -21,6 +21,10 @@ public class Enemigos
         {
             return level;
         }
+        set
+        {
+          
+        }
     }
     public int Exp {get;set;}
 

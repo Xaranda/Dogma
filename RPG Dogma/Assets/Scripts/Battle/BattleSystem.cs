@@ -46,8 +46,6 @@ public class BattleSystem : MonoBehaviour
 	}
 
 	public void Update (){
-		lvl = PlayerUnit.saera.level;
-
 
 		if (Input.GetKeyDown(KeyCode.H))
 		{

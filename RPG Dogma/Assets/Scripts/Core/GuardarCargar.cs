@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class GuardarCargar : MonoBehaviour
 {
-  [SerializeField] BattleSystem info;
+  Enemigos _enemigo;
+  public bool Cargado;
+  public bool Guardado;
+  [SerializeField] Player PlayerUnit;
+
+
   void Update ()
   {
     if (Input.GetKeyDown(KeyCode.G))
@@ -17,12 +22,14 @@ public class GuardarCargar : MonoBehaviour
 
   public void Guardar()
   {
-    PlayerPrefs.SetInt("Nivel", info.lvl);
+    Guardado = true;
+    PlayerPrefs.SetInt("Nivel", PlayerUnit.saera.Level);
     //consigo guardar la variable, pero no cargarla luego, ya que solo modifico esa variable
     // y no el componente de nivel que maneja el juego.
   }
   public void Cargar ()
   {
-    info.lvlcargado = PlayerPrefs.GetInt ("Nivel");
+    Cargado = true;
+    PlayerUnit.saera.Level = PlayerPrefs.GetInt ("Nivel");
   }
 }

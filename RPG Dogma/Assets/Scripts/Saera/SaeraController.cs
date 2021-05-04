@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SaeraController : MonoBehaviour
+public class SaeraController : MonoBehaviour, ISavable
 {
 	public float speed;
 	public LayerMask solidObjectsLayer;
+	public LayerMask interactableLayer;
 	public LayerMask EnemySpawner;
 
 	public event Action OnEncountered;
@@ -22,33 +23,64 @@ public class SaeraController : MonoBehaviour
 	private void Awake()
     {
 		animator = GetComponent<Animator>();
+		gameObject.tag = "Player";
 	}
 
     public void HandleUpdate()
     {
-		if (!isMoving)
+			if (!isMoving)
+			{
+				input.x = Input.GetAxisRaw("Horizontal");
+				input.y = Input.GetAxisRaw("Vertical");
+
+				//sin movimiento diagonal
+				if (input.x != 0) input.y = 0;
+
+				if  (input != Vector2.zero)
+            	{
+								animator.SetFloat("LookX", input.x);
+								animator.SetFloat("LookY", input.y);
+
+								var targetPos = transform.position;
+								targetPos.x += input.x;
+								targetPos.y += input.y;
+
+								if (IsWalkable(targetPos))
+								StartCoroutine(Move(targetPos));
+            	}
+						}
+						animator.SetBool("isMoving", isMoving);
+
+						if (Input.GetKeyDown(KeyCode.R))
+						{
+							Interact();
+						}
+    	}
+
+			public object CaptureState ()
+			{
+				float [] position = new float [] {transform.position.x,transform.position.y};
+				return position;
+			}
+			public void RestoreState (object state)
+			{
+				var position = (float[])state;
+				transform.position = new Vector3(position[0],position[1]);
+			}
+
+		void Interact()
 		{
-			input.x = Input.GetAxisRaw("Horizontal");
-			input.y = Input.GetAxisRaw("Vertical");
+			var faceDir = new Vector3(animator.GetFloat("LookX"), animator.GetFloat("LookY"));
+			var interactPos = transform.position + faceDir;
 
-			//sin movimiento diagonal
-			if (input.x != 0) input.y = 0;
+			// Debug.DrawLine(transform.position, interactPos,Color.green, 0.5f);
 
-			if  (input != Vector2.zero)
-            {
-				animator.SetFloat("LookX", input.x);
-				animator.SetFloat("LookY", input.y);
-
-				var targetPos = transform.position;
-				targetPos.x += input.x;
-				targetPos.y += input.y;
-
-				if (IsWalkable(targetPos))
-					StartCoroutine(Move(targetPos));
-            }
+			var collider = Physics2D.OverlapCircle(interactPos,0.3f, interactableLayer);
+			if (collider != null)
+			{
+				collider.GetComponent<Interactable>()?.Interact();
+			}
 		}
-		animator.SetBool("isMoving", isMoving);
-    }
 
 	IEnumerator Move (Vector3 targetPos)
     {
@@ -66,7 +98,7 @@ public class SaeraController : MonoBehaviour
 
 	private bool IsWalkable(Vector3 targetPos)
     {
-		if (Physics2D.OverlapCircle(targetPos , 0.3f , solidObjectsLayer) != null)
+		if (Physics2D.OverlapCircle(targetPos , 0.3f , solidObjectsLayer | interactableLayer) != null)
         {
 			return false;
         }
@@ -77,7 +109,7 @@ public class SaeraController : MonoBehaviour
     {
 		if (Physics2D.OverlapCircle(transform.position,0.5f, EnemySpawner) != null)
 		{
-			if (UnityEngine.Random.Range (1,100)<=10)
+			if (UnityEngine.Random.Range (1,100)<=5)
             {
 				animator.SetBool("isMoving", false);
 				OnEncountered();

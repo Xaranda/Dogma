@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { World, Battle}
+public enum GameState { World, Battle, Dialog}
 
 public class GameController : MonoBehaviour
 {
@@ -17,6 +17,16 @@ public class GameController : MonoBehaviour
     {
         saeraController.OnEncountered += StartBattle;
         battleSystem.OnBattleOver += EndBattle;
+
+        DialogueManager.Instance.OnShowDialog += () =>
+        {
+          state = GameState.Dialog;
+        };
+        DialogueManager.Instance.OnCloseDialog += () =>
+        {
+          if (state == GameState.Dialog)
+            state = GameState.World;
+        };
     }
 
     void StartBattle()
@@ -43,16 +53,30 @@ public class GameController : MonoBehaviour
         if (state == GameState.World)
         {
             saeraController.HandleUpdate();
+            
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+              SavingSystem.i.Save("save1");
+            }
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+              SavingSystem.i.Load("save1");
+            }
         }
         else if (state == GameState.Battle)
         {
             battleSystem.SetupBattle();
             StartCoroutine(Wait());
         }
+        else if(state == GameState.Dialog)
+        {
+          DialogueManager.Instance.HandleUpdate();
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
           Application.Quit();
         }
+
 
     }
 
