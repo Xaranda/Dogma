@@ -52,8 +52,14 @@ public class GameController : MonoBehaviour
     {
         if (state == GameState.World)
         {
+          Debug.Log(TitleSceneLoad.cargado);
+            if (TitleSceneLoad.cargado == true)
+            {
+              SavingSystem.i.Load("save1");
+              TitleSceneLoad.cargado = false;
+            }
             saeraController.HandleUpdate();
-            
+
             if (Input.GetKeyDown(KeyCode.G))
             {
               SavingSystem.i.Save("save1");

@@ -107,7 +107,7 @@ public class SaeraController : MonoBehaviour, ISavable
 
 	private void CheckForEncounters()
     {
-		if (Physics2D.OverlapCircle(transform.position,0.5f, EnemySpawner) != null)
+		if (Physics2D.OverlapCircle(transform.position,0.1f, EnemySpawner) != null)
 		{
 			if (UnityEngine.Random.Range (1,100)<=5)
             {

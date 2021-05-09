@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 					StartCoroutine(Delay(() =>
 					{
 						BattleSystem.singleton.playerDodgeDer = false;
-					}, 2f));
+					}, 1.5f));
 
 					BattleSystem.singleton.StartPlayerAnimation("SaeraCombateDodgeDerecha");
 					cooldown = 0.0f;
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
 					StartCoroutine(Delay(() =>
 					{
 						BattleSystem.singleton.playerDodgeIzq = false;
-					}, 2f));
+					}, 1.5f));
 
 					BattleSystem.singleton.StartPlayerAnimation("SaeraCombateDodgeIzquierda");
 					cooldown = 0.0f;
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
 					StartCoroutine(Delay(() =>
 					{
 						BattleSystem.singleton.playerDodgeDown = false;
-					}, 2f));
+					}, 1.5f));
 					BattleSystem.singleton.StartPlayerAnimation("SaeraCombateDodgeDown");
 					cooldown = 0.0f;
 				}
