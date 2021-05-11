@@ -23,8 +23,9 @@ public class Enemigos
         }
         set
         {
-          
+
         }
+
     }
     public int Exp {get;set;}
 
@@ -37,6 +38,25 @@ public class Enemigos
 
         Exp = Base.GetExpForLevel(Level);
     }
+
+  //  public Enemigos(PjSaveData saveData)
+  //  {
+  //    HP = saveData.hp;
+  //    level = saveData.level;
+//      Exp = saveData.exp;
+  //  }
+
+    //public PjSaveData GetSaveData()
+    //{
+      //var saveData = new PjSaveData()
+      //{
+      //  hp = HP,
+        //level = Level,
+        //exp = Exp,
+      //};
+
+    //  return saveData;
+    //}
     public bool CheckForLevelUp ()
     {
       if (Exp > Base.GetExpForLevel(level + 1))
@@ -98,3 +118,11 @@ public class Enemigos
       HP = MaxHp;
     }
 }
+//[System.Serializable]
+//public class PjSaveData
+//{
+  //public int hp;
+  //public int level;
+  //public int exp;
+
+//}

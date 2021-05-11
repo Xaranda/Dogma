@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 public class SaeraController : MonoBehaviour, ISavable
@@ -59,13 +60,20 @@ public class SaeraController : MonoBehaviour, ISavable
 
 			public object CaptureState ()
 			{
-				float [] position = new float [] {transform.position.x,transform.position.y};
-				return position;
+				var saveData = new PlayerSaveData()
+				{
+					position = new float [] {transform.position.x,transform.position.y},
+					//enemigos = GetComponent<Grupo>().enemigos.Select(p => p.GetSaveData()).ToList()
+				};
+				return saveData;
 			}
 			public void RestoreState (object state)
 			{
-				var position = (float[])state;
-				transform.position = new Vector3(position[0],position[1]);
+				var saveData = (PlayerSaveData)state;
+				var pos = saveData.position;
+				transform.position = new Vector3(pos[0],pos[1]);
+
+				//GetComponent<Grupo>().enemigos = saveData.enemigos.Select(s => new Enemigos(s)).ToList();
 			}
 
 		void Interact()
@@ -117,4 +125,11 @@ public class SaeraController : MonoBehaviour, ISavable
             }
         }
     }
+}
+
+[Serializable]
+public class PlayerSaveData
+{
+	public float [] position;
+	//public List <PjSaveData> enemigos;
 }

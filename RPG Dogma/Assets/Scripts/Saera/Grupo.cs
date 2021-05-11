@@ -7,6 +7,18 @@ public class Grupo : MonoBehaviour
 {
     [SerializeField] public List<Enemigos> grupo;
 
+    public List<Enemigos> enemigos
+    {
+      get
+      {
+        return grupo;
+      }
+      set
+      {
+        //grupo = value;
+      }
+    }
+
     private void Start ()
     {
         foreach (var enemigos in grupo)
