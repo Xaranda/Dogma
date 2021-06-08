@@ -20,14 +20,9 @@ ScriptsOnlyBuild:
     - SavingSystem
     - TitleSceneLoad
     Unity.2D.Tilemap.Editor.dll:
-    - UnityEditor.Tilemaps.GridBrush
-    - UnityEditor.Tilemaps.GridBrushEditor
-    - UnityEditor.Tilemaps.GridPaintPaletteClipboard
-    - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
     - UnityEditor.Tilemaps.GridPalettes
-    - UnityEditor.Tilemaps.PaintableSceneViewGrid
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.Rider.Editor.dll:
@@ -131,11 +126,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13322}
     - Class: 114
-      Script: {instanceID: 13758}
+      Script: {instanceID: 13756}
     - Class: 114
-      Script: {instanceID: 13774}
+      Script: {instanceID: 13772}
     - Class: 114
-      Script: {instanceID: 13818}
+      Script: {instanceID: 13816}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -210,17 +205,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13290}
     - Class: 114
-      Script: {instanceID: 13518}
+      Script: {instanceID: 13516}
     - Class: 114
-      Script: {instanceID: 13642}
+      Script: {instanceID: 13640}
     - Class: 114
-      Script: {instanceID: 13662}
+      Script: {instanceID: 13660}
     - Class: 114
-      Script: {instanceID: 13758}
+      Script: {instanceID: 13756}
     - Class: 114
-      Script: {instanceID: 13774}
+      Script: {instanceID: 13772}
     - Class: 114
-      Script: {instanceID: 13810}
+      Script: {instanceID: 13808}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1034,5 +1029,5 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/TitleScene.unity
   - Assets/Scenes/EscenadeMundo.unity
-  playerPath: C:/Users/yitan/Documents/GitHub/Dogma/RPG Dogma/Builds/Build 0.0.2/RPG
+  playerPath: C:/Users/yitan/Documents/GitHub/Dogma/RPG Dogma/Builds/Build Final/RPG
     DOGMA.exe
